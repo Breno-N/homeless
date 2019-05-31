@@ -78,7 +78,6 @@ Todo o back-end do projeto se concentra na pasta backend. A única exceção é 
 	- server.js
 - node_modules
 - package.json
-- uploads
 
 #### Backend
 Possui toda a estrutra da parte backend da aplicação.
