@@ -10,6 +10,15 @@ class PessoaProcurada {
 		.catch(error => next(new Error(`Erro ao consultar Listagem de Pessoas Procuradas. Erro : ${error.message}`)) );
 	};
 
+	findLatestWithLimit(req, res, next){
+
+		const qtd = req.params.qtd;
+
+		dao.findLatestWithLimit(qtd)
+		.then(results => res.json(results))
+		.catch(error => next(new Error(`Erro ao consultar Listagem de Pessoas Procuradas. Erro : ${error.message}`)) );
+	};
+
 	findById(req, res, next){
 
 		const id = req.params.id;
