@@ -12,6 +12,9 @@ router.route('/')
 router.route('/latest/:qtd')
 	.get(pessoaProcurada.findLatestWithLimit);	
 
+router.route('/name/:name')
+	.get(pessoaProcurada.findByName);	
+
 router.route('/:id')
 	.get(pessoaProcurada.findById)
 	.put(format, pessoaProcurada.update, pessoaProcuradaAcao.insert);
