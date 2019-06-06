@@ -56,6 +56,22 @@ class PessoaProcuradaDAO {
 	    return db.executeQuery(query, params, null, true);
 	};
 
+	findByName(name){
+
+		let query = `SELECT 
+						t1.id as id,
+						t2.nome as quem_procura,
+						t1.nome as nome,
+						t1.idade as idade,
+						t1.morava_em as morava_em
+					FROM pessoas_procuradas t1
+					LEFT JOIN pessoas_procura t2 ON t1.id_pessoa_procura = t2.id 
+					WHERE (t1.nome like '%${name}%' or t2.nome like '%${name}%') and t1.ativo = 1
+					ORDER BY t1.data_cadastro DESC`;
+
+	    return db.executeQuery(query);
+	};
+
 	insert(object){
 
 		let query = `INSERT INTO pessoas_procuradas 
