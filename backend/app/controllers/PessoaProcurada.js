@@ -28,6 +28,15 @@ class PessoaProcurada {
 		.catch(error => next(new Error(`Erro ao consultar Dados de Pessoa Procurada ID ${id}. Erro : ${error.message}`)) );
 	};
 
+	findByName(req, res, next){
+
+		const name = req.params.name;
+
+		dao.findByName(name)
+		.then(results => res.json(results))
+		.catch(error => next(new Error(`Erro ao consultar Dados de Pessoa Procurada Por Nome ${name}. Erro : ${error.message}`)) );
+	};
+
 	async insert(req, res, next){
 
 		try {
