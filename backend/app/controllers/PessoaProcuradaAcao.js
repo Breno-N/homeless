@@ -30,6 +30,16 @@ class PessoaProcuradaAcao {
 			}
 		}
 	};
+
+
+	findActionsByPersonId(req, res, next){
+
+		const pessoaId = req.params.pessoaId;
+
+		dao.findByPersonId(pessoaId)
+		.then(results => res.json(results))
+		.catch(error => next(new Error(`Erro ao consultar Dados de Pessoa Procurada ID ${id}. Erro : ${error.message}`)) );
+	};
 };
 
 module.exports = new PessoaProcuradaAcao();

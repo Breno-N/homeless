@@ -11,6 +11,22 @@ class PessoaProcuradaAcaoDAO {
 	    return db.executeQuery(query, params);
 	};
 
+	findByPersonId(pessoaId){
+		let query = `SELECT
+						id as id,
+						id_acao as acao,
+						visto_em as ultima_vez_visto_em,
+						data as data
+					FROM
+						pessoas_procuradas_acoes
+					WHERE
+						id_pessoa_procurada = ?
+					ORDER BY data DESC`
+		let params = [pessoaId];
+
+		return db.executeQuery(query, params);
+	}
+
 	insert(object){
 
 		let query = `INSERT INTO pessoas_procuradas_acoes
