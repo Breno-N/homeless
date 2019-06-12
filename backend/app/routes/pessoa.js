@@ -19,4 +19,7 @@ router.route('/:id')
 	.get(pessoaProcurada.findById)
 	.put(format, pessoaProcurada.update, pessoaProcuradaAcao.insert);
 
+router.route('/:pessoaId/acoes')
+	.get(pessoaProcuradaAcao.findActionsByPersonId)
+
 module.exports = router;
