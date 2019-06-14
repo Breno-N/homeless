@@ -31,7 +31,6 @@ class PessoaProcuradaAcao {
 		}
 	};
 
-
 	findActionsByPersonId(req, res, next){
 
 		const pessoaId = req.params.pessoaId;

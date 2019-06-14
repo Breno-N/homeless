@@ -37,6 +37,29 @@ class PessoaProcurada {
 		.catch(error => next(new Error(`Erro ao consultar Dados de Pessoa Procurada Por Nome ${name}. Erro : ${error.message}`)) );
 	};
 
+	async checkExists(req, res, next){
+
+		try {
+
+			if(req.body.passBy) {
+
+				next();
+			} else {
+
+				let resultPessoaProcurada = await dao.checkExists(req.pessoaProcurada.nome);
+
+				if(resultPessoaProcurada.length){
+
+					res.json(resultPessoaProcurada);
+				} else {
+					next();
+				}
+			}
+		} catch(error){
+			next(new Error(`Erro ao Verificar Existência de Pessoa Procurada: ${error.message}`));
+		}
+	};
+
 	async insert(req, res, next){
 
 		try {
@@ -70,6 +93,25 @@ class PessoaProcurada {
 			
 		} catch(error){
 			next(new Error(`Erro ao Atualizar Pessoa Procurada: ${error.message}`));
+		}
+	};
+
+	async remove(req, res, next){
+
+		try {
+
+			if(!req.pessoaProcurada.id) {
+				throw new Error(`ID não informado para remoção`);
+			}
+
+			req.pessoaProcurada.data_atualizacao = moment().format('YYYY-MM-DD HH:mm:ss');
+
+			let pessoaProcuradaRemovida = await dao.remove(req.pessoaProcurada);
+
+			res.json(pessoaProcuradaRemovida);
+
+		} catch(error){
+			next(new Error(`Erro ao Remover Pessoa Procurada: ${error.message}`));
 		}
 	};
 

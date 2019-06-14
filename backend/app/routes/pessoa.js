@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.route('/')
 	.get(pessoaProcurada.find)
-	.post(format, pessoaProcura.insert, pessoaProcurada.insert, pessoaProcuradaAcao.insert);
+	.post(format, pessoaProcurada.checkExists, pessoaProcura.insert, pessoaProcurada.insert, pessoaProcuradaAcao.insert);
 
 router.route('/latest/:qtd')
 	.get(pessoaProcurada.findLatestWithLimit);	
@@ -17,7 +17,11 @@ router.route('/name/:name')
 
 router.route('/:id')
 	.get(pessoaProcurada.findById)
-	.put(format, pessoaProcurada.update, pessoaProcuradaAcao.insert);
+	.put(format, pessoaProcurada.update, pessoaProcuradaAcao.insert)
+	.delete(format, pessoaProcurada.remove)
+
+router.route('/:pessoaId/acoes')
+	.get(pessoaProcuradaAcao.findActionsByPersonId)
 
 router.route('/:pessoaId/acoes')
 	.get(pessoaProcuradaAcao.findActionsByPersonId)
