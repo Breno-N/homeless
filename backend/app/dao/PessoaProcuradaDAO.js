@@ -72,6 +72,20 @@ class PessoaProcuradaDAO {
 	    return db.executeQuery(query);
 	};
 
+	checkExists(name){
+
+		let query = `SELECT 
+						t1.id as id,
+						t1.nome as nome,
+						t1.idade as idade,
+						t1.morava_em as morava_em
+					FROM pessoas_procuradas t1
+					WHERE t1.nome like '%${name}%'
+					ORDER BY t1.data_cadastro DESC`;
+
+	    return db.executeQuery(query);
+	};
+
 	insert(object){
 
 		let query = `INSERT INTO pessoas_procuradas 
@@ -93,6 +107,19 @@ class PessoaProcuradaDAO {
 					WHERE id = ?`;
 
 		let params = [object.idade, object.ultima_vez_visto_em, object.data_atualizacao, object.id];
+
+	    return db.executeQuery(query, params, 'affectedRows');
+	};
+
+	remove(object){
+
+		let query = `UPDATE pessoas_procuradas SET 
+						ativo = 0,
+						ultima_vez_visto_em = ?,
+						data_atualizacao = ?
+					WHERE id = ?`;
+
+		let params = [object.ultima_vez_visto_em, object.data_atualizacao, object.id];
 
 	    return db.executeQuery(query, params, 'affectedRows');
 	};
