@@ -43,13 +43,14 @@ class PessoaProcuradaDAO {
 						t1.idade as idade,
 						t1.morava_em as morava_em,
 						t1.ultima_vez_visto_em as ultima_vez_visto_em,
+						t1.ativo as ativo,
 						t2.nome as quem_procura,
 						t2.telefone as quem_procura_tel,
 						t2.whatsapp as quem_procura_whats,
 						t2.email as quem_procura_email
 					FROM pessoas_procuradas t1
 					LEFT JOIN pessoas_procura t2 ON t1.id_pessoa_procura = t2.id 
-					WHERE t1.id = ? and t1.ativo = 1`;
+					WHERE t1.id = ?`;
 
 		let params = [id];
 
@@ -78,7 +79,8 @@ class PessoaProcuradaDAO {
 						t1.id as id,
 						t1.nome as nome,
 						t1.idade as idade,
-						t1.morava_em as morava_em
+						t1.morava_em as morava_em,
+						t1.ativo as ativo,
 					FROM pessoas_procuradas t1
 					WHERE t1.nome like '%${name}%'
 					ORDER BY t1.data_cadastro DESC`;
