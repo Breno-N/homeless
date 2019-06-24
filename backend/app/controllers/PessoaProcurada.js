@@ -99,15 +99,14 @@ class PessoaProcurada {
 	async remove(req, res, next){
 
 		try {
-			if(!req.params.id) {
+
+			if(!req.pessoaProcurada.id) {
 				throw new Error(`ID não informado para remoção`);
 			}
 
-			let pessoaProcurada = await dao.findById(req.params.id);
+			req.pessoaProcurada.data_atualizacao = moment().format('YYYY-MM-DD HH:mm:ss');
 
-			pessoaProcurada.data_atualizacao = moment().format('YYYY-MM-DD HH:mm:ss');
-
-			let pessoaProcuradaRemovida = await dao.remove(pessoaProcurada);
+			let pessoaProcuradaRemovida = await dao.remove(req.pessoaProcurada);
 
 			res.json(pessoaProcuradaRemovida);
 
