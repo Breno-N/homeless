@@ -1,5 +1,6 @@
 const express = require('express');
 const format = require('../middlewares/format2Object');
+const sendMail = require('../middlewares/sendMail');
 const pessoaProcura = require('../controllers/PessoaProcura');
 const pessoaProcurada = require('../controllers/PessoaProcurada');
 const pessoaProcuradaAcao = require('../controllers/PessoaProcuradaAcao');
@@ -17,13 +18,13 @@ router.route('/name/:name')
 
 router.route('/:id')
 	.get(pessoaProcurada.findById)
-	.put(format, pessoaProcurada.update, pessoaProcuradaAcao.insert)
-	.delete(format, pessoaProcurada.remove)
+	.put(format, pessoaProcurada.update, sendMail, pessoaProcuradaAcao.insert)
+	.delete(format, pessoaProcurada.remove);
 
 router.route('/:pessoaId/acoes')
-	.get(pessoaProcuradaAcao.findActionsByPersonId)
+	.get(pessoaProcuradaAcao.findActionsByPersonId);
 
 router.route('/:pessoaId/acoes')
-	.get(pessoaProcuradaAcao.findActionsByPersonId)
+	.get(pessoaProcuradaAcao.findActionsByPersonId);
 
 module.exports = router;
