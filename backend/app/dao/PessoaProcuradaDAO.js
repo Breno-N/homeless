@@ -45,9 +45,9 @@ class PessoaProcuradaDAO {
 						t1.ultima_vez_visto_em as ultima_vez_visto_em,
 						t1.ativo as ativo,
 						t2.nome as quem_procura
-						--t2.telefone as quem_procura_tel,
-						--t2.whatsapp as quem_procura_whats,
-						--t2.email as quem_procura_email
+						-- t2.telefone as quem_procura_tel,
+						-- t2.whatsapp as quem_procura_whats,
+						-- t2.email as quem_procura_email
 					FROM pessoas_procuradas t1
 					LEFT JOIN pessoas_procura t2 ON t1.id_pessoa_procura = t2.id 
 					WHERE t1.id = ?`;
