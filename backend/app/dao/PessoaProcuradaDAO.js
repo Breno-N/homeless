@@ -80,7 +80,7 @@ class PessoaProcuradaDAO {
 						t1.nome as nome,
 						t1.idade as idade,
 						t1.morava_em as morava_em,
-						t1.ativo as ativo,
+						t1.ativo as ativo
 					FROM pessoas_procuradas t1
 					WHERE t1.nome like '%${name}%'
 					ORDER BY t1.data_cadastro DESC`;
