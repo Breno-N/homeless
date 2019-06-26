@@ -13,15 +13,15 @@ async function sendMail(req, res, next){
 
 			next();
 		} else {
-
+			
 			let transporter = nodemailer.createTransport({
 		 		service: 'gmail',
 		 		auth: {
-		        	user: process.env.DB_PASS.MAIL_ADDRESS,
+		        	user: process.env.MAIL_ADDRESS,
 		       		pass: process.env.MAIL_PASS
 		    	}
 			});
-
+			
 			let mailOptions = {
 				from: `sr.mendigo.app@gmail.com`,
 				to: `${result.email}`,
@@ -35,11 +35,14 @@ async function sendMail(req, res, next){
 			transporter.sendMail(mailOptions, (err, info) => {
 			   	if(err){
 		     		next(err);
+		     		
 			   	}
 			   	else{
 		     		next();
+		     		
 			   	}
 			});
+			
 		}
 	} catch(error) {
 		next(new Error(`Erro ao Enviar E-mail para a Peessoa que esta Procurando..: ${error.message}`));
